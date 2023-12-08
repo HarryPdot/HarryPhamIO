@@ -16,7 +16,7 @@ const MainPage: React.FunctionComponent = () => {
     }
   };
   return (
-    <main className={styles.main} tabIndex="0" onKeyDown={arrowKeys}>
+    <main className={styles.main} tabIndex={0} onKeyDown={arrowKeys}>
       <Shrimp />
     </main>
   );
