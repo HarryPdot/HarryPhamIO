@@ -4,7 +4,7 @@ import { Shrimp } from '../Shrimp/Shrimp';
 import styles from './MainPage.module.css';
 
 const MainPage: React.FunctionComponent = () => {
-  const arrowKeys = (e: KeyboardEvent<HTMLElement>) => {
+  const arrowKeys = (e: React.KeyboardEvent<HTMLElement>) => {
     if (e.keyCode === 37) {
       console.log('left');
     } else if (e.keyCode === 38) {

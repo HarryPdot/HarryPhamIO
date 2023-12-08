@@ -4,7 +4,7 @@ import { Character, stances } from '@/Assets/index';
 
 import styles from './Shrimp.module.css';
 
-const Shrimp: FC = () => {
+const Shrimp: React.FunctionComponent = () => {
   const character = useMemo(
     () => (
       <Character
