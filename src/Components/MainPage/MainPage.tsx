@@ -1,11 +1,9 @@
 'use client';
 
-import { ReactElement } from 'react';
-
 import { Shrimp } from '../Shrimp/Shrimp';
 import styles from './MainPage.module.css';
 
-const MainPage: FC = () => {
+const MainPage: React.FunctionComponent = () => {
   const arrowKeys = (e: KeyboardEvent<HTMLElement>) => {
     if (e.keyCode === 37) {
       console.log('left');
