@@ -1,6 +1,8 @@
-import { Character, stances } from '@/Assets/index';
-import styles from './Shrimp.module.css';
 import { useMemo } from 'react';
+
+import { Character, stances } from '@/Assets/index';
+
+import styles from './Shrimp.module.css';
 
 const Shrimp: FC = () => {
   const character = useMemo(

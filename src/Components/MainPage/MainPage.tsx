@@ -1,8 +1,9 @@
 'use client';
 
 import { ReactElement } from 'react';
-import styles from './MainPage.module.css';
+
 import { Shrimp } from '../Shrimp/Shrimp';
+import styles from './MainPage.module.css';
 
 const MainPage: FC = () => {
   const arrowKeys = (e: KeyboardEvent<HTMLElement>) => {
