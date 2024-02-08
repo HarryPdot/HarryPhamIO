@@ -1,10 +1,11 @@
 'use client';
 
-import { Shrimp } from '../Shrimp/Shrimp';
-import map from '../../Assets/Background/PelletTown.png';
-import styles from './MainPage.module.css';
-import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+
+import map from '../../Assets/Background/PelletTown.png';
+import { Shrimp } from '../Shrimp/Shrimp';
+import styles from './MainPage.module.css';
 
 type spritePosition = {
   spriteX: number;
