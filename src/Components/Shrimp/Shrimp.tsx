@@ -15,14 +15,9 @@ const position = () => {
   return document.getElementById('shrimp')?.getBoundingClientRect();
 };
 
-const Shrimp: React.FunctionComponent = ({
-  pos,
-  setPos,
-  input,
-  setInput,
-}): any => {
+const Shrimp: React.FunctionComponent = (props) => {
   const [frameCount, setFrameCount] = useState<number>(0);
-
+  const { pos, setPos, input, setInput } = props;
   const frame = () => {
     animate();
     updateVar('--shrimpX', pos.spriteX + 'px');
