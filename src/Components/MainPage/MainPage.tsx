@@ -44,7 +44,6 @@ const MainPage: React.FunctionComponent = () => {
   };
 
   const offPutKey = (e: React.KeyboardEvent<HTMLElement>) => {
-    event.preventDefault();
     if (e.keyCode === 37) {
       setInput({ ...input, left: false });
     } else if (e.keyCode === 38) {
