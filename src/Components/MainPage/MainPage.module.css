@@ -8,6 +8,12 @@
 }
 
 .bg {
+  height: 200%;
+  width: 200%;
+}
+
+.screen {
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }

@@ -28,8 +28,8 @@ const MainPage: React.FunctionComponent = () => {
   });
 
   const [pos, setPos] = useState<spritePosition>({
-    spriteX: 0,
-    spriteY: 0,
+    spriteX: 200,
+    spriteY: 200,
   });
 
   const inputKey = (e: React.KeyboardEvent<HTMLElement>) => {
@@ -63,8 +63,8 @@ const MainPage: React.FunctionComponent = () => {
       onKeyDown={inputKey}
       onKeyUp={offPutKey}
     >
-      <section>
-        {/* <Image src={map} alt="Map" className={styles.bg} /> */}
+      <section className={styles.screen}>
+        <Image src={map} alt="Map" className={styles.bg} />
         <Shrimp pos={pos} setPos={setPos} input={input} setInput={setInput} />
       </section>
     </main>

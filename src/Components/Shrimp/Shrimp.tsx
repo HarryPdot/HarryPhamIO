@@ -15,35 +15,55 @@ const position = () => {
   return document.getElementById('shrimp')?.getBoundingClientRect();
 };
 
+const fps: number = 16;
+const speed: number = 3;
 const Shrimp: any = (props) => {
   const [frameCount, setFrameCount] = useState<number>(0);
+  const [stance, setStance] = useState('stand1');
   const { pos, setPos, input, setInput } = props;
   const frame = () => {
-    animate();
+    move();
     updateVar('--shrimpX', pos.spriteX + 'px');
     updateVar('--shrimpY', pos.spriteY + 'px');
     setFrameCount((prev) => prev + 1);
   };
 
   useEffect(() => {
-    const interval = setInterval(() => frame(), 16);
+    const interval = setInterval(() => frame(), fps);
     return () => clearInterval(interval);
   }, [frameCount]);
 
-  const animate = () => {
-    if (Object.keys(input).every((boo) => !input[boo])) return;
+  const move = () => {
+    if (Object.keys(input).every((boo) => !input[boo])) {
+      animate(stances().stand);
+      return;
+    }
+    setDirection();
+    animate(stances().walk);
     if (input.left) {
-      setPos({ ...pos, spriteX: pos.spriteX - 5 });
+      setPos({ ...pos, spriteX: pos.spriteX - speed });
     }
     if (input.up) {
-      setPos({ ...pos, spriteY: pos.spriteY - 5 });
+      setPos({ ...pos, spriteY: pos.spriteY - speed });
     }
     if (input.right) {
-      setPos({ ...pos, spriteX: pos.spriteX + 5 });
+      setPos({ ...pos, spriteX: pos.spriteX + speed });
     }
     if (input.down) {
-      setPos({ ...pos, spriteY: pos.spriteY + 5 });
+      setPos({ ...pos, spriteY: pos.spriteY + speed });
     }
+  };
+
+  const setDirection = () => {
+    if (input.right) {
+      updateVar('--transform', 'translate(-50%, -50%) scaleX(-1)');
+    } else if (input.left) {
+      updateVar('--transform', 'translate(-50%, -50%) scaleX(1)');
+    }
+  };
+
+  const animate = (animation) => {
+    setStance(animation);
   };
 
   const character = useMemo(
@@ -53,11 +73,11 @@ const Shrimp: any = (props) => {
         style={{
           position: 'absolute',
         }}
-        stance={stances().stand}
+        stance={stance}
         className={styles.shrimp}
       />
     ),
-    [],
+    [stance],
   );
   return <>{character}</>;
 };

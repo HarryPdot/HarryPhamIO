@@ -6,7 +6,4 @@
   left: calc(var(--shrimpX));
   top: calc(var(--shrimpY));
   transform: var(--transform);
-  transition-property: top, left;
-  transition-duration: var(--velocity);
-  transition-timing-function: linear;
 }
