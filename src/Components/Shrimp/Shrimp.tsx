@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import { Character, stances } from '@/Assets/index';
+import { Character, stances, collision } from '@/Assets/index';
 
 import styles from './Shrimp.module.css';
 
@@ -23,8 +23,8 @@ const Shrimp: any = (props) => {
   const { pos, setPos, input, setInput } = props;
   const frame = () => {
     move();
-    updateVar('--shrimpX', pos.spriteX + 'px');
-    updateVar('--shrimpY', pos.spriteY + 'px');
+    alignCharacterPosition();
+    alignMapPosition();
     setFrameCount((prev) => prev + 1);
   };
 
@@ -52,6 +52,7 @@ const Shrimp: any = (props) => {
     if (input.down) {
       setPos({ ...pos, spriteY: pos.spriteY + speed });
     }
+    console.log(collision);
   };
 
   const setDirection = () => {
@@ -64,6 +65,16 @@ const Shrimp: any = (props) => {
 
   const animate = (animation) => {
     setStance(animation);
+  };
+
+  const alignCharacterPosition = () => {
+    updateVar('--shrimpX', pos.spriteX + 'px');
+    updateVar('--shrimpY', pos.spriteY + 'px');
+  };
+
+  const alignMapPosition = () => {
+    updateVar('--mapY', -pos.spriteY + 'px');
+    updateVar('--mapX', -pos.spriteX + 'px');
   };
 
   const character = useMemo(

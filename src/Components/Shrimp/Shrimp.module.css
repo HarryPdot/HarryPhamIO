@@ -3,7 +3,10 @@
   position: fixed;
   pointer-events: none;
   image-rendering: pixelated;
-  left: calc(var(--shrimpX));
-  top: calc(var(--shrimpY));
+  /* left: calc(var(--shrimpX));
+  top: calc(var(--shrimpY)); */
+  left: calc(540px);
+  top: calc(360px);
   transform: var(--transform);
+  /* transform: translate3d(0, 0, 0); */
 }

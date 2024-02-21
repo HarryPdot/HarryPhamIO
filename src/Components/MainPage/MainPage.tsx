@@ -28,8 +28,8 @@ const MainPage: React.FunctionComponent = () => {
   });
 
   const [pos, setPos] = useState<spritePosition>({
-    spriteX: 200,
-    spriteY: 200,
+    spriteX: 690,
+    spriteY: 530,
   });
 
   const inputKey = (e: React.KeyboardEvent<HTMLElement>) => {
