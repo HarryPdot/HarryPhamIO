@@ -21,6 +21,7 @@ const Shrimp: any = (props) => {
   const [frameCount, setFrameCount] = useState<number>(0);
   const [stance, setStance] = useState('stand1');
   const { pos, setPos, input, setInput } = props;
+  const { collisionArr, setCollisionArr } = useState([]);
   const frame = () => {
     move();
     alignCharacterPosition();
@@ -52,14 +53,13 @@ const Shrimp: any = (props) => {
     if (input.down) {
       setPos({ ...pos, spriteY: pos.spriteY + speed });
     }
-    console.log(collision);
   };
 
   const setDirection = () => {
     if (input.right) {
-      updateVar('--transform', 'translate(-50%, -50%) scaleX(-1)');
+      updateVar('--transform', 'scaleX(-1)');
     } else if (input.left) {
-      updateVar('--transform', 'translate(-50%, -50%) scaleX(1)');
+      updateVar('--transform', 'scaleX(1)');
     }
   };
 
@@ -76,6 +76,8 @@ const Shrimp: any = (props) => {
     updateVar('--mapY', -pos.spriteY + 'px');
     updateVar('--mapX', -pos.spriteX + 'px');
   };
+
+  const splitCollision = () => {};
 
   const character = useMemo(
     () => (
