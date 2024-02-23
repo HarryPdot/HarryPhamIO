@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import { Character, stances, collision } from '@/Assets/index';
+import { Character, stances } from '@/Assets/index';
 
 import styles from './Shrimp.module.css';
 
@@ -20,8 +20,8 @@ const speed: number = 3;
 const Shrimp: any = (props) => {
   const [frameCount, setFrameCount] = useState<number>(0);
   const [stance, setStance] = useState('stand1');
-  const { pos, setPos, input, setInput } = props;
-  const { collisionArr, setCollisionArr } = useState([]);
+  const { pos, setPos, input, setInput, collisionArr } = props;
+
   const frame = () => {
     move();
     alignCharacterPosition();
@@ -76,8 +76,6 @@ const Shrimp: any = (props) => {
     updateVar('--mapY', -pos.spriteY + 'px');
     updateVar('--mapX', -pos.spriteX + 'px');
   };
-
-  const splitCollision = () => {};
 
   const character = useMemo(
     () => (
