@@ -74,7 +74,7 @@ const MainPage: React.FunctionComponent = () => {
   };
 
   useEffect(() => {
-    const newArr: any[] = [];
+    const newArr: string[] = [];
     for (let i = 0; i < collision.length; i += 70) {
       newArr.push(collision.slice(i, 70 + i));
     }
