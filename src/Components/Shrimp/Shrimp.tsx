@@ -14,7 +14,13 @@ const position = (id) => {
   return document.getElementById(id)?.getBoundingClientRect();
 };
 
-const collisionDetection = (square2, left, up, right, down) => {
+const collisionDetection = (
+  square2: string,
+  left: number,
+  up: number,
+  right: number,
+  down: number,
+) => {
   if (
     position('shrimp')?.x + position('shrimp')?.width >=
       position(square2)?.x - right &&
