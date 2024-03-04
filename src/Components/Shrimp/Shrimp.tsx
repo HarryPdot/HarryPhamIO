@@ -9,10 +9,18 @@ const updateVar = (vars, value): any => {
   return document.documentElement.style.setProperty(vars, value);
 };
 
-const position = () => {
+const position = (id) => {
   if (typeof document === 'undefined') return;
-  // console.log(document.getElementById('shrimp')?.getBoundingClientRect());
-  return document.getElementById('shrimp')?.getBoundingClientRect();
+  return document.getElementById(id)?.getBoundingClientRect();
+};
+
+const collisionDetection = (square1, square2) => {
+  return (
+    position(square1)?.x + position(square1)?.width >= position(square2)?.x &&
+    position(square2)?.x + position(square2)?.width >= position(square1)?.x &&
+    position(square1)?.y + position(square1)?.height >= position(square2)?.y &&
+    position(square2)?.y + position(square2)?.height >= position(square1)?.y
+  );
 };
 
 const fps: number = 16;
@@ -20,7 +28,7 @@ const speed: number = 3;
 const Shrimp: any = (props) => {
   const [frameCount, setFrameCount] = useState<number>(0);
   const [stance, setStance] = useState('stand1');
-  const { pos, setPos, input, setInput, collisionArr } = props;
+  const { pos, setPos, input } = props;
 
   const frame = () => {
     move();
@@ -39,18 +47,64 @@ const Shrimp: any = (props) => {
       animate(stances().stand);
       return;
     }
-    setDirection();
     animate(stances().walk);
+    setDirection();
+
     if (input.left) {
+      if (
+        position('shrimp')?.x + position('shrimp')?.width >=
+          position('1924')?.x &&
+        position('1924')?.x + position('1924')?.width + 6 >=
+          position('shrimp')?.x &&
+        position('shrimp')?.y + position('shrimp')?.height >=
+          position('1924')?.y &&
+        position('1924')?.y + position('1924')?.height >= position('shrimp')?.y
+      ) {
+        return;
+      }
       setPos({ ...pos, spriteX: pos.spriteX - speed });
     }
     if (input.up) {
+      if (
+        position('shrimp')?.x + position('shrimp')?.width >=
+          position('1924')?.x &&
+        position('1924')?.x + position('1924')?.width >=
+          position('shrimp')?.x &&
+        position('shrimp')?.y + position('shrimp')?.height >=
+          position('1924')?.y &&
+        position('1924')?.y + position('1924')?.height >=
+          position('shrimp')?.y - 6
+      ) {
+        return;
+      }
       setPos({ ...pos, spriteY: pos.spriteY - speed });
     }
     if (input.right) {
+      if (
+        position('shrimp')?.x + position('shrimp')?.width >=
+          position('1924')?.x - 6 &&
+        position('1924')?.x + position('1924')?.width >=
+          position('shrimp')?.x &&
+        position('shrimp')?.y + position('shrimp')?.height >=
+          position('1924')?.y &&
+        position('1924')?.y + position('1924')?.height >= position('shrimp')?.y
+      ) {
+        return;
+      }
       setPos({ ...pos, spriteX: pos.spriteX + speed });
     }
     if (input.down) {
+      if (
+        position('shrimp')?.x + position('shrimp')?.width >=
+          position('1924')?.x &&
+        position('1924')?.x + position('1924')?.width >=
+          position('shrimp')?.x &&
+        position('shrimp')?.y + position('shrimp')?.height + 6 >=
+          position('1924')?.y &&
+        position('1924')?.y + position('1924')?.height >= position('shrimp')?.y
+      ) {
+        return;
+      }
       setPos({ ...pos, spriteY: pos.spriteY + speed });
     }
   };

@@ -20,6 +20,18 @@ type keysInput = {
   down: boolean;
 };
 
+const position = (id) => {
+  if (typeof document === 'undefined') return;
+  return document.getElementById(id)?.getBoundingClientRect();
+};
+
+const left = 37 || 'a';
+const up = 38 || 'w';
+const right = 39 || 'd';
+const down = 40 || 's';
+const x = 48;
+const y = 48;
+
 const MainPage: React.FunctionComponent = () => {
   const [input, setInput] = useState<keysInput>({
     left: false,
@@ -28,7 +40,9 @@ const MainPage: React.FunctionComponent = () => {
     down: false,
   });
 
-  const [collisionArr, setCollisionArr] = useState();
+  const [squareArr, setSquareArr] = useState();
+
+  const [collisionPos, setCollisionPos] = useState([]);
 
   const [pos, setPos] = useState<spritePosition>({
     spriteX: 684,
@@ -36,25 +50,25 @@ const MainPage: React.FunctionComponent = () => {
   });
 
   const inputKey = (e: React.KeyboardEvent<HTMLElement>) => {
-    if (e.keyCode === 37) {
+    if (e.keyCode === left) {
       setInput({ ...input, left: true });
-    } else if (e.keyCode === 38) {
+    } else if (e.keyCode === up) {
       setInput({ ...input, up: true });
-    } else if (e.keyCode === 39) {
+    } else if (e.keyCode === right) {
       setInput({ ...input, right: true });
-    } else if (e.keyCode === 40) {
+    } else if (e.keyCode === down) {
       setInput({ ...input, down: true });
     }
   };
 
   const offPutKey = (e: React.KeyboardEvent<HTMLElement>) => {
-    if (e.keyCode === 37) {
+    if (e.keyCode === left) {
       setInput({ ...input, left: false });
-    } else if (e.keyCode === 38) {
+    } else if (e.keyCode === up) {
       setInput({ ...input, up: false });
-    } else if (e.keyCode === 39) {
+    } else if (e.keyCode === right) {
       setInput({ ...input, right: false });
-    } else if (e.keyCode === 40) {
+    } else if (e.keyCode === down) {
       setInput({ ...input, down: false });
     }
   };
@@ -64,11 +78,15 @@ const MainPage: React.FunctionComponent = () => {
     for (let i = 0; i < collision.length; i += 70) {
       newArr.push(collision.slice(i, 70 + i));
     }
-    setCollisionArr(newArr);
+    setSquareArr(newArr);
+    for (let i = 0; i < newArr.length; i++) {
+      for (let j = 0; j < newArr[i].length; j++) {
+        if (newArr[i][j] === 1025) {
+          console.log(`${i * y} ${j * x}`);
+        }
+      }
+    }
   }, []);
-
-  const x = 48;
-  const y = 48;
 
   return (
     <main
@@ -78,31 +96,23 @@ const MainPage: React.FunctionComponent = () => {
       onKeyUp={offPutKey}
     >
       <section className={styles.screen}>
-        <Shrimp
-          pos={pos}
-          setPos={setPos}
-          input={input}
-          setInput={setInput}
-          collisionArr={collisionArr}
-          setCollisionArr={setCollisionArr}
-        />
+        <Shrimp pos={pos} setPos={setPos} input={input} />
         <Image src={map} alt="Map" className={styles.bg} />
         <section className={styles.collisionScreen}>
-          {collisionArr?.map((row, i) => {
+          {squareArr?.map((row, i) => {
             return (
               <div key={i}>
                 {row?.map((col, j) => {
                   const divStyle = {
-                    top: `${i * 48}px`,
-                    left: `${j * 48}px`,
-                    width: 48,
-                    height: 48,
+                    top: `${i * y}px`,
+                    left: `${j * x}px`,
+                    width: x,
+                    height: y,
                     position: 'absolute',
                     backgroundColor: 'red',
-                    border: '1px solid red',
                   };
                   if (col === 1025) {
-                    return <div key={j} style={divStyle}></div>;
+                    return <div key={j} id={`${i}${j}`} style={divStyle}></div>;
                   }
                 })}
               </div>

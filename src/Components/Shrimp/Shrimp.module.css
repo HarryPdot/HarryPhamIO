@@ -9,6 +9,6 @@
   top: 360px;
   transform: var(--transform);
   /* transform: translate3d(0, 0, 0); */
-  border: 1px solid red;
+  /* border: 1px solid red; */
   z-index: 9999;
 }
