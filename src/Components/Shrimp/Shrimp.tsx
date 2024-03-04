@@ -10,7 +10,6 @@ const updateVar = (vars, value): any => {
 };
 
 const position = (id) => {
-  if (typeof document === 'undefined') return;
   return document.getElementById(id)?.getBoundingClientRect();
 };
 
@@ -25,6 +24,8 @@ const collisionDetection = (square1, square2, left, up, right, down) => {
     position(square2)?.y + position(square2)?.height >=
       position(square1)?.y - up
   ) {
+    if (typeof document === 'undefined') return;
+  } else {
     return true;
   }
 };
