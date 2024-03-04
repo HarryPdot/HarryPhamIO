@@ -15,6 +15,7 @@ const position = (id: any) => {
 };
 
 const collisionDetection = (square1, square2, left, up, right, down) => {
+  if (!square2) return;
   if (
     position(square1)?.x + position(square1)?.width >=
       position(square2)?.x - right &&
