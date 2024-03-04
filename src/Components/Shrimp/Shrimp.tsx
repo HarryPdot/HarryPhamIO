@@ -14,16 +14,16 @@ const position = (id) => {
   return document.getElementById(id)?.getBoundingClientRect();
 };
 
-const collisionDetection = (square1, square2, left, up, right, down) => {
+const collisionDetection = (square2, left, up, right, down) => {
   return (
-    position(square1)?.x + position(square1)?.width >=
+    position('shrimp')?.x + position('shrimp')?.width >=
       position(square2)?.x - right &&
     position(square2)?.x + position(square2)?.width + left >=
-      position(square1)?.x &&
-    position(square1)?.y + position(square1)?.height + down >=
+      position('shrimp')?.x &&
+    position('shrimp')?.y + position('shrimp')?.height + down >=
       position(square2)?.y &&
     position(square2)?.y + position(square2)?.height >=
-      position(square1)?.y - up
+      position('shrimp')?.y - up
   );
 };
 
@@ -55,26 +55,26 @@ const Shrimp: any = (props) => {
     setDirection();
     if (input.left) {
       for (let i = 0; i < collisionPos.length; i++) {
-        if (collisionDetection('shrimp', collisionPos[i], 6, 0, 0, 0)) return;
+        if (collisionDetection(collisionPos[i], 6, 0, 0, 0)) return;
       }
 
       setPos({ ...pos, spriteX: pos.spriteX - speed });
     }
     if (input.up) {
       for (let i = 0; i < collisionPos.length; i++) {
-        if (collisionDetection('shrimp', collisionPos[i], 0, 6, 0, 0)) return;
+        if (collisionDetection(collisionPos[i], 0, 6, 0, 0)) return;
       }
       setPos({ ...pos, spriteY: pos.spriteY - speed });
     }
     if (input.right) {
       for (let i = 0; i < collisionPos.length; i++) {
-        if (collisionDetection('shrimp', collisionPos[i], 0, 0, 6, 0)) return;
+        if (collisionDetection(collisionPos[i], 0, 0, 6, 0)) return;
       }
       setPos({ ...pos, spriteX: pos.spriteX + speed });
     }
     if (input.down) {
       for (let i = 0; i < collisionPos.length; i++) {
-        if (collisionDetection('shrimp', collisionPos[i], 0, 0, 0, 6)) return;
+        if (collisionDetection(collisionPos[i], 0, 0, 0, 6)) return;
       }
       setPos({ ...pos, spriteY: pos.spriteY + speed });
     }
