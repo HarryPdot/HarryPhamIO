@@ -22,14 +22,13 @@ const collisionDetection = (
   down: number,
 ) => {
   if (
-    position('shrimp')?.x + position('shrimp')?.width >=
-      position(square2)?.x - right &&
-    position(square2)?.x + position(square2)?.width + left >=
-      position('shrimp')?.x &&
-    position('shrimp')?.y + position('shrimp')?.height + down >=
-      position(square2)?.y &&
-    position(square2)?.y + position(square2)?.height >=
-      position('shrimp')?.y - up
+    position('shrimp').x + position('shrimp').width >=
+      position(square2).x - right &&
+    position(square2).x + position(square2).width + left >=
+      position('shrimp').x &&
+    position('shrimp').y + position('shrimp').height + down >=
+      position(square2).y &&
+    position(square2).y + position(square2)?.height >= position('shrimp').y - up
   ) {
     return true;
   }
