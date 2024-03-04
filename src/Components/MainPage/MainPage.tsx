@@ -113,8 +113,9 @@ const MainPage: React.FunctionComponent = () => {
                     left: j * x,
                     width: x,
                     height: y,
+                    position: 'absolute',
                     backgroundColor: 'red',
-                  };
+                  } as React.CSSProperties;
                   if (col === 1025) {
                     return <div key={j} id={`${i}${j}`} style={divStyle}></div>;
                   }
