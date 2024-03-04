@@ -113,7 +113,6 @@ const MainPage: React.FunctionComponent = () => {
                     left: j * x,
                     width: x,
                     height: y,
-                    position: 'absolute',
                     backgroundColor: 'red',
                   };
                   if (col === 1025) {
