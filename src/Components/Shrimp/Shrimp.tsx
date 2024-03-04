@@ -15,7 +15,7 @@ const position = (id) => {
 };
 
 const collisionDetection = (square2, left, up, right, down) => {
-  return (
+  if (
     position('shrimp')?.x + position('shrimp')?.width >=
       position(square2)?.x - right &&
     position(square2)?.x + position(square2)?.width + left >=
@@ -24,7 +24,9 @@ const collisionDetection = (square2, left, up, right, down) => {
       position(square2)?.y &&
     position(square2)?.y + position(square2)?.height >=
       position('shrimp')?.y - up
-  );
+  ) {
+    return true;
+  }
 };
 
 const fps: number = 16;
