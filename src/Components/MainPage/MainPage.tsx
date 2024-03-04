@@ -109,8 +109,8 @@ const MainPage: React.FunctionComponent = () => {
               <div key={i}>
                 {row?.map((col, j) => {
                   const divStyle = {
-                    top: `${i * y}px`,
-                    left: `${j * x}px`,
+                    top: i * y,
+                    left: j * x,
                     width: x,
                     height: y,
                     position: 'absolute',
