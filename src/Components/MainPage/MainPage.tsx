@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { collision } from '@/Assets';
 
 import map from '../../Assets/Background/PelletTown.png';
+import { Collision } from '../Collision/Collision';
 import { Shrimp } from '../Shrimp/Shrimp';
 import styles from './MainPage.module.css';
 type spritePosition = {
@@ -42,7 +43,7 @@ const MainPage: React.FunctionComponent = () => {
 
   const [squareArr, setSquareArr] = useState<any>();
 
-  const [collisionPos, setCollisionPos] = useState<any>([]);
+  const [collisionPos, setCollisionPos] = useState<string[]>([]);
 
   const [pos, setPos] = useState<spritePosition>({
     spriteX: 684,
@@ -115,6 +116,7 @@ const MainPage: React.FunctionComponent = () => {
                     height: y,
                     position: 'absolute',
                     backgroundColor: 'red',
+                    opacity: 0,
                   } as React.CSSProperties;
                   if (col === 1025) {
                     return <div key={j} id={`${i}${j}`} style={divStyle}></div>;
@@ -124,6 +126,13 @@ const MainPage: React.FunctionComponent = () => {
             );
           })}
         </section>
+        <Collision
+          collisionPos={collisionPos}
+          setCollisionPos={setCollisionPos}
+          collision={collision}
+          squareArr={squareArr}
+          setSquareArr={setSquareArr}
+        ></Collision>
       </section>
     </main>
   );
