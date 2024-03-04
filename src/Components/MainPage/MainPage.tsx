@@ -40,9 +40,9 @@ const MainPage: React.FunctionComponent = () => {
     down: false,
   });
 
-  const [squareArr, setSquareArr] = useState();
+  const [squareArr, setSquareArr] = useState<any>();
 
-  const [collisionPos, setCollisionPos] = useState([]);
+  const [collisionPos, setCollisionPos] = useState<any>([]);
 
   const [pos, setPos] = useState<spritePosition>({
     spriteX: 684,
@@ -74,7 +74,7 @@ const MainPage: React.FunctionComponent = () => {
   };
 
   useEffect(() => {
-    const newArr: string[] = [];
+    const newArr: any[] = [];
     for (let i = 0; i < collision.length; i += 70) {
       newArr.push(collision.slice(i, 70 + i));
     }
