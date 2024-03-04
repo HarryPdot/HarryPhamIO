@@ -14,12 +14,16 @@ const position = (id) => {
   return document.getElementById(id)?.getBoundingClientRect();
 };
 
-const collisionDetection = (square1, square2) => {
+const collisionDetection = (square1, square2, left, up, right, down) => {
   return (
-    position(square1)?.x + position(square1)?.width >= position(square2)?.x &&
-    position(square2)?.x + position(square2)?.width >= position(square1)?.x &&
-    position(square1)?.y + position(square1)?.height >= position(square2)?.y &&
-    position(square2)?.y + position(square2)?.height >= position(square1)?.y
+    position(square1)?.x + position(square1)?.width >=
+      position(square2)?.x - right &&
+    position(square2)?.x + position(square2)?.width + left >=
+      position(square1)?.x &&
+    position(square1)?.y + position(square1)?.height + down >=
+      position(square2)?.y &&
+    position(square2)?.y + position(square2)?.height >=
+      position(square1)?.y - up
   );
 };
 
@@ -28,7 +32,7 @@ const speed: number = 3;
 const Shrimp: any = (props) => {
   const [frameCount, setFrameCount] = useState<number>(0);
   const [stance, setStance] = useState('stand1');
-  const { pos, setPos, input } = props;
+  const { pos, setPos, input, collisionPos } = props;
 
   const frame = () => {
     move();
@@ -49,61 +53,28 @@ const Shrimp: any = (props) => {
     }
     animate(stances().walk);
     setDirection();
-
     if (input.left) {
-      if (
-        position('shrimp')?.x + position('shrimp')?.width >=
-          position('1924')?.x &&
-        position('1924')?.x + position('1924')?.width + 6 >=
-          position('shrimp')?.x &&
-        position('shrimp')?.y + position('shrimp')?.height >=
-          position('1924')?.y &&
-        position('1924')?.y + position('1924')?.height >= position('shrimp')?.y
-      ) {
-        return;
+      for (let i = 0; i < collisionPos.length; i++) {
+        if (collisionDetection('shrimp', collisionPos[i], 6, 0, 0, 0)) return;
       }
+
       setPos({ ...pos, spriteX: pos.spriteX - speed });
     }
     if (input.up) {
-      if (
-        position('shrimp')?.x + position('shrimp')?.width >=
-          position('1924')?.x &&
-        position('1924')?.x + position('1924')?.width >=
-          position('shrimp')?.x &&
-        position('shrimp')?.y + position('shrimp')?.height >=
-          position('1924')?.y &&
-        position('1924')?.y + position('1924')?.height >=
-          position('shrimp')?.y - 6
-      ) {
-        return;
+      for (let i = 0; i < collisionPos.length; i++) {
+        if (collisionDetection('shrimp', collisionPos[i], 0, 6, 0, 0)) return;
       }
       setPos({ ...pos, spriteY: pos.spriteY - speed });
     }
     if (input.right) {
-      if (
-        position('shrimp')?.x + position('shrimp')?.width >=
-          position('1924')?.x - 6 &&
-        position('1924')?.x + position('1924')?.width >=
-          position('shrimp')?.x &&
-        position('shrimp')?.y + position('shrimp')?.height >=
-          position('1924')?.y &&
-        position('1924')?.y + position('1924')?.height >= position('shrimp')?.y
-      ) {
-        return;
+      for (let i = 0; i < collisionPos.length; i++) {
+        if (collisionDetection('shrimp', collisionPos[i], 0, 0, 6, 0)) return;
       }
       setPos({ ...pos, spriteX: pos.spriteX + speed });
     }
     if (input.down) {
-      if (
-        position('shrimp')?.x + position('shrimp')?.width >=
-          position('1924')?.x &&
-        position('1924')?.x + position('1924')?.width >=
-          position('shrimp')?.x &&
-        position('shrimp')?.y + position('shrimp')?.height + 6 >=
-          position('1924')?.y &&
-        position('1924')?.y + position('1924')?.height >= position('shrimp')?.y
-      ) {
-        return;
+      for (let i = 0; i < collisionPos.length; i++) {
+        if (collisionDetection('shrimp', collisionPos[i], 0, 0, 0, 6)) return;
       }
       setPos({ ...pos, spriteY: pos.spriteY + speed });
     }

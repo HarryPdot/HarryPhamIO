@@ -82,7 +82,7 @@ const MainPage: React.FunctionComponent = () => {
     for (let i = 0; i < newArr.length; i++) {
       for (let j = 0; j < newArr[i].length; j++) {
         if (newArr[i][j] === 1025) {
-          console.log(`${i * y} ${j * x}`);
+          setCollisionPos((collisionPos) => [...collisionPos, `${i}${j}`]);
         }
       }
     }
@@ -96,7 +96,12 @@ const MainPage: React.FunctionComponent = () => {
       onKeyUp={offPutKey}
     >
       <section className={styles.screen}>
-        <Shrimp pos={pos} setPos={setPos} input={input} />
+        <Shrimp
+          pos={pos}
+          setPos={setPos}
+          input={input}
+          collisionPos={collisionPos}
+        />
         <Image src={map} alt="Map" className={styles.bg} />
         <section className={styles.collisionScreen}>
           {squareArr?.map((row, i) => {
