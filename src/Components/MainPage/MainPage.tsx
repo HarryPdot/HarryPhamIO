@@ -21,11 +21,6 @@ type keysInput = {
   down: boolean;
 };
 
-const position = (id) => {
-  if (typeof document === 'undefined') return;
-  return document.getElementById(id)?.getBoundingClientRect();
-};
-
 const left = 37 || 'a';
 const up = 38 || 'w';
 const right = 39 || 'd';

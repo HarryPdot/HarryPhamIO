@@ -12,18 +12,19 @@ type positionType = HTMLDivElement | HTMLImageElement;
 
 const position = (id: string) => {
   const element = document.getElementById(id) as positionType;
-  return element.getBoundingClientRect();
+  return element?.getBoundingClientRect();
 };
 
 const collisionDetection = (square1, square2, left, up, right, down) => {
   return (
-    position(square1).x + position(square1).width >=
-      position(square2).x - right &&
-    position(square2).x + position(square2).width + left >=
-      position(square1).x &&
-    position(square1).y + position(square1).height + down >=
-      position(square2).y &&
-    position(square2).y + position(square2).height >= position(square1).y - up
+    position(square1)?.x + position(square1)?.width >=
+      position(square2)?.x - right &&
+    position(square2)?.x + position(square2)?.width + left >=
+      position(square1)?.x &&
+    position(square1)?.y + position(square1)?.height + down >=
+      position(square2)?.y &&
+    position(square2)?.y + position(square2)?.height >=
+      position(square1)?.y - up
   );
 };
 
