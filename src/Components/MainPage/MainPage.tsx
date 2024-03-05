@@ -7,6 +7,7 @@ import { collision } from '@/Assets';
 
 import map from '../../Assets/Background/PelletTown.png';
 import { Collision } from '../Collision/Collision';
+import { Island } from '../Island/Island';
 import { Shrimp } from '../Shrimp/Shrimp';
 import styles from './MainPage.module.css';
 type spritePosition = {
@@ -99,7 +100,7 @@ const MainPage: React.FunctionComponent = () => {
           collisionPos={collisionPos}
         />
         <Image src={map} alt="Map" className={styles.bg} />
-        <section className={styles.collisionScreen}>
+        {/* <section className={styles.collisionScreen}>
           {squareArr?.map((row, i) => {
             return (
               <div key={i}>
@@ -120,14 +121,16 @@ const MainPage: React.FunctionComponent = () => {
               </div>
             );
           })}
-        </section>
-        <Collision
+        </section> */}
+        <Island
           collisionPos={collisionPos}
           setCollisionPos={setCollisionPos}
           collision={collision}
           squareArr={squareArr}
           setSquareArr={setSquareArr}
-        ></Collision>
+          x={x}
+          y={y}
+        ></Island>
       </section>
     </main>
   );
