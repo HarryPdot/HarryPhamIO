@@ -40,7 +40,7 @@ const MainPage: React.FunctionComponent = () => {
     spriteY: 546,
   });
 
-  const [currentMap, setCurrentMap] = useState<string>([]);
+  const [currentMap, setCurrentMap] = useState<any>([]);
 
   useEffect(() => {}, []);
 
