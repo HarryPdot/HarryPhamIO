@@ -33,7 +33,7 @@ const speed: number = 3;
 const Shrimp: any = (props) => {
   const [frameCount, setFrameCount] = useState<number>(0);
   const [stance, setStance] = useState('stand1');
-  const { pos, setPos, input, collisionPos } = props;
+  const { pos, setPos, input, currentMap, mapsData } = props;
 
   const frame = () => {
     move();
@@ -55,27 +55,30 @@ const Shrimp: any = (props) => {
     animate(stances().walk);
     setDirection();
     if (input.left) {
-      for (let i = 0; i < collisionPos.length; i++) {
-        if (collisionDetection('shrimp', collisionPos[i], 6, 0, 0, 0)) return;
+      for (let i = 0; i < currentMap.positionId.length; i++) {
+        if (collisionDetection('shrimp', currentMap.positionId[i], 6, 0, 0, 0))
+          return;
       }
-
       setPos({ ...pos, spriteX: pos.spriteX - speed });
     }
     if (input.up) {
-      for (let i = 0; i < collisionPos.length; i++) {
-        if (collisionDetection('shrimp', collisionPos[i], 0, 6, 0, 0)) return;
+      for (let i = 0; i < currentMap.positionId.length; i++) {
+        if (collisionDetection('shrimp', currentMap.positionId[i], 0, 6, 0, 0))
+          return;
       }
       setPos({ ...pos, spriteY: pos.spriteY - speed });
     }
     if (input.right) {
-      for (let i = 0; i < collisionPos.length; i++) {
-        if (collisionDetection('shrimp', collisionPos[i], 0, 0, 6, 0)) return;
+      for (let i = 0; i < currentMap.positionId.length; i++) {
+        if (collisionDetection('shrimp', currentMap.positionId[i], 0, 0, 6, 0))
+          return;
       }
       setPos({ ...pos, spriteX: pos.spriteX + speed });
     }
     if (input.down) {
-      for (let i = 0; i < collisionPos.length; i++) {
-        if (collisionDetection('shrimp', collisionPos[i], 0, 0, 0, 6)) return;
+      for (let i = 0; i < currentMap.positionId.length; i++) {
+        if (collisionDetection('shrimp', currentMap.positionId[i], 0, 0, 0, 6))
+          return;
       }
       setPos({ ...pos, spriteY: pos.spriteY + speed });
     }

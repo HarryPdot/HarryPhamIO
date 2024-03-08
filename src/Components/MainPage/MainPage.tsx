@@ -3,12 +3,10 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
-import { collision } from '@/Assets';
-
 import map from '../../Assets/Background/PelletTown.png';
-import { Collision } from '../Collision/Collision';
 import { Island } from '../Island/Island';
 import { Shrimp } from '../Shrimp/Shrimp';
+import { Test } from '../Test/Test';
 import styles from './MainPage.module.css';
 type spritePosition = {
   spriteX: number;
@@ -26,8 +24,6 @@ const left = 37 || 'a';
 const up = 38 || 'w';
 const right = 39 || 'd';
 const down = 40 || 's';
-const x = 48;
-const y = 48;
 
 const MainPage: React.FunctionComponent = () => {
   const [input, setInput] = useState<keysInput>({
@@ -37,14 +33,16 @@ const MainPage: React.FunctionComponent = () => {
     down: false,
   });
 
-  const [squareArr, setSquareArr] = useState<any>();
-
-  const [collisionPos, setCollisionPos] = useState<string[]>([]);
+  const [mapsData, setMapsData] = useState<any>([]);
 
   const [pos, setPos] = useState<spritePosition>({
     spriteX: 684,
     spriteY: 546,
   });
+
+  const [currentMap, setCurrentMap] = useState<string>([]);
+
+  useEffect(() => {}, []);
 
   const inputKey = (e: React.KeyboardEvent<HTMLElement>) => {
     if (e.keyCode === left) {
@@ -70,21 +68,6 @@ const MainPage: React.FunctionComponent = () => {
     }
   };
 
-  useEffect(() => {
-    const newArr: any[] = [];
-    for (let i = 0; i < collision.length; i += 70) {
-      newArr.push(collision.slice(i, 70 + i));
-    }
-    setSquareArr(newArr);
-    for (let i = 0; i < newArr.length; i++) {
-      for (let j = 0; j < newArr[i].length; j++) {
-        if (newArr[i][j] === 1025) {
-          setCollisionPos((collisionPos) => [...collisionPos, `${i}${j}`]);
-        }
-      }
-    }
-  }, []);
-
   return (
     <main
       className={styles.main}
@@ -97,40 +80,20 @@ const MainPage: React.FunctionComponent = () => {
           pos={pos}
           setPos={setPos}
           input={input}
-          collisionPos={collisionPos}
+          currentMap={currentMap}
+          mapsData={mapsData}
         />
-        <Image src={map} alt="Map" className={styles.bg} />
-        {/* <section className={styles.collisionScreen}>
-          {squareArr?.map((row, i) => {
-            return (
-              <div key={i}>
-                {row?.map((col, j) => {
-                  const divStyle = {
-                    top: i * y,
-                    left: j * x,
-                    width: x,
-                    height: y,
-                    position: 'absolute',
-                    backgroundColor: 'red',
-                    opacity: 0,
-                  } as React.CSSProperties;
-                  if (col === 1025) {
-                    return <div key={j} id={`${i}${j}`} style={divStyle}></div>;
-                  }
-                })}
-              </div>
-            );
-          })}
-        </section> */}
+        <Image src={currentMap?.image} alt="Map" className={styles.bg} />
         <Island
-          collisionPos={collisionPos}
-          setCollisionPos={setCollisionPos}
-          collision={collision}
-          squareArr={squareArr}
-          setSquareArr={setSquareArr}
-          x={x}
-          y={y}
+          setCurrentMap={setCurrentMap}
+          setMapsData={setMapsData}
+          currentMap={currentMap}
         ></Island>
+        <Test
+          setCurrentMap={setCurrentMap}
+          setMapsData={setMapsData}
+          currentMap={currentMap}
+        ></Test>
       </section>
     </main>
   );
