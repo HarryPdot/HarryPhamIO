@@ -6,8 +6,10 @@ import { collision } from '@/Assets';
 
 import map from '../../Assets/Background/PelletTown.png';
 import { Collision } from '../Collision/Collision';
-const x = 48;
-const y = 48;
+const x: number = 48;
+const y: number = 48;
+const screenWidth: number = 540;
+const screenHeight: number = 360;
 
 const Island = (props) => {
   const { setCurrentMap, setMapsData, currentMap } = props;
@@ -15,6 +17,7 @@ const Island = (props) => {
   useEffect(() => {
     const initialArray: any[] = [];
     const postArray: any[] = [];
+    let startPosition = '';
     for (let i = 0; i < collision.length; i += 70) {
       initialArray.push(collision.slice(i, 70 + i));
     }
@@ -23,13 +26,31 @@ const Island = (props) => {
         if (initialArray[i][j] === 1025) {
           postArray.push(`${i}${j}`);
         }
+        if (initialArray[i][j] === 1026) {
+          startPosition = {
+            x: j * x - screenWidth,
+            y: i * y - screenHeight,
+          };
+        }
       }
     }
     setMapsData((prevState) => ({
       ...prevState,
-      island: { array: initialArray, positionId: postArray, image: map },
+      island: {
+        name: 'island',
+        array: initialArray,
+        positionId: postArray,
+        image: map,
+        startPosition: startPosition,
+      },
     }));
-    setCurrentMap({ array: initialArray, positionId: postArray, image: map });
+    setCurrentMap({
+      name: 'island',
+      array: initialArray,
+      positionId: postArray,
+      image: map,
+      startPosition: startPosition,
+    });
   }, []);
 
   return <Collision squareArr={currentMap.array} x={x} y={y} />;

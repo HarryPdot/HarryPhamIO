@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
-import map from '../../Assets/Background/PelletTown.png';
 import { Island } from '../Island/Island';
 import { Shrimp } from '../Shrimp/Shrimp';
 import { Test } from '../Test/Test';
@@ -49,6 +48,16 @@ const MainPage: React.FunctionComponent = () => {
       setIsLoading(false);
     }, 3000);
   }, []);
+
+  useEffect(() => {
+    if (currentMap.length === 0) return;
+    console.log(currentMap);
+    // setCurrentMap(mapsData.test);
+    setPos({
+      spriteX: currentMap.startPosition.x,
+      spriteY: currentMap.startPosition.y,
+    });
+  }, [currentMap]);
 
   const inputKey = (e: React.KeyboardEvent<HTMLElement>) => {
     if (e.keyCode === left) {
@@ -106,5 +115,4 @@ const MainPage: React.FunctionComponent = () => {
     </main>
   );
 };
-
 export { MainPage };

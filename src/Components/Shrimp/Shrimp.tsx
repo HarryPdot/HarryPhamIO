@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { Character, stances } from '@/Assets/index';
 
@@ -35,7 +35,7 @@ const Shrimp: any = (props) => {
   const [frameCount, setFrameCount] = useState<number>(0);
   const [stance, setStance] = useState('stand1');
   const { pos, setPos, input, currentMap, mapsData, setCurrentMap } = props;
-
+  const shrimpRef = useRef();
   useEffect(() => {
     const interval = setInterval(() => frame(), fps);
     return () => clearInterval(interval);
@@ -116,6 +116,7 @@ const Shrimp: any = (props) => {
         }}
         stance={stance}
         className={styles.shrimp}
+        ref={shrimpRef}
       />
     ),
     [stance],
