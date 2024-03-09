@@ -4,11 +4,12 @@ import { Character, stances } from '@/Assets/index';
 
 import styles from './Shrimp.module.css';
 
+type positionType = HTMLDivElement | HTMLImageElement;
+
 const updateVar = (vars, value): any => {
   if (typeof document === 'undefined') return;
   return document.documentElement.style.setProperty(vars, value);
 };
-type positionType = HTMLDivElement | HTMLImageElement;
 
 const position = (id: string) => {
   const element = document.getElementById(id) as positionType;
@@ -33,7 +34,12 @@ const speed: number = 3;
 const Shrimp: any = (props) => {
   const [frameCount, setFrameCount] = useState<number>(0);
   const [stance, setStance] = useState('stand1');
-  const { pos, setPos, input, currentMap, mapsData } = props;
+  const { pos, setPos, input, currentMap, mapsData, setCurrentMap } = props;
+
+  useEffect(() => {
+    const interval = setInterval(() => frame(), fps);
+    return () => clearInterval(interval);
+  }, [frameCount]);
 
   const frame = () => {
     move();
@@ -41,11 +47,6 @@ const Shrimp: any = (props) => {
     alignMapPosition();
     setFrameCount((prev) => prev + 1);
   };
-
-  useEffect(() => {
-    const interval = setInterval(() => frame(), fps);
-    return () => clearInterval(interval);
-  }, [frameCount]);
 
   const move = () => {
     if (Object.keys(input).every((boo) => !input[boo])) {

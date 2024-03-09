@@ -33,6 +33,8 @@ const MainPage: React.FunctionComponent = () => {
     down: false,
   });
 
+  const [isLoading, setIsLoading] = useState(true);
+
   const [mapsData, setMapsData] = useState<any>([]);
 
   const [pos, setPos] = useState<spritePosition>({
@@ -42,7 +44,11 @@ const MainPage: React.FunctionComponent = () => {
 
   const [currentMap, setCurrentMap] = useState<any>([]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+  }, []);
 
   const inputKey = (e: React.KeyboardEvent<HTMLElement>) => {
     if (e.keyCode === left) {
@@ -75,6 +81,11 @@ const MainPage: React.FunctionComponent = () => {
       onKeyDown={inputKey}
       onKeyUp={offPutKey}
     >
+      {isLoading ? (
+        <div className={styles.loading}></div>
+      ) : (
+        <div className={styles.loadingOut}></div>
+      )}
       <section className={styles.screen}>
         <Shrimp
           pos={pos}
@@ -82,18 +93,15 @@ const MainPage: React.FunctionComponent = () => {
           input={input}
           currentMap={currentMap}
           mapsData={mapsData}
+          setCurrentMap={setCurrentMap}
         />
-        <Image src={currentMap?.image} alt="Map" className={styles.bg} />
+        <Image src={currentMap.image} alt="Map" className={styles.bg} />
         <Island
           setCurrentMap={setCurrentMap}
           setMapsData={setMapsData}
           currentMap={currentMap}
         ></Island>
-        <Test
-          setCurrentMap={setCurrentMap}
-          setMapsData={setMapsData}
-          currentMap={currentMap}
-        ></Test>
+        <Test setMapsData={setMapsData} currentMap={currentMap}></Test>
       </section>
     </main>
   );
