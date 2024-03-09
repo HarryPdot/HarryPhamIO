@@ -6,10 +6,10 @@ import { collision } from '@/Assets';
 
 import map from '../../Assets/Background/PelletTown.png';
 import { Collision } from '../Collision/Collision';
-const x: number = 48;
-const y: number = 48;
-const screenWidth: number = 540;
-const screenHeight: number = 360;
+const x = 48;
+const y = 48;
+const screenWidth = 540;
+const screenHeight = 360;
 
 const Island = (props) => {
   const { setCurrentMap, setMapsData, currentMap, setLoadReady } = props;

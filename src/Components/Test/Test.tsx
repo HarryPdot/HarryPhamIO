@@ -7,8 +7,8 @@ import map from '../../Assets/Background/TestMap.png';
 import { Collision } from '../Collision/Collision';
 const x = 48;
 const y = 48;
-const screenWidth: number = 540;
-const screenHeight: number = 360;
+const screenWidth = 540;
+const screenHeight = 360;
 const Test = (props) => {
   const { setMapsData, currentMap, testing, setLoadReady } = props;
 

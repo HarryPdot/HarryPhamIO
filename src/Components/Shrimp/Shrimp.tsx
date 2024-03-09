@@ -65,7 +65,6 @@ const Shrimp: any = (props) => {
     animate(stances().walk);
     setDirection();
     if (input.left) {
-      console.log(currentMap.positionId);
       for (let i = 0; i < currentMap.positionId.length; i++) {
         if (collisionDetection('shrimp', currentMap.positionId[i], 6, 0, 0, 0))
           return;
