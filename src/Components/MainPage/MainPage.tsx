@@ -110,11 +110,11 @@ const MainPage: React.FunctionComponent = () => {
       onKeyDown={inputKey}
       onKeyUp={offPutKey}
     >
-      {/* {isLoading ? (
+      {isLoading ? (
         <div className={styles.loading}></div>
       ) : (
         <div className={styles.loadingOut}></div>
-      )} */}
+      )}
       <section className={styles.screen}>
         <Shrimp
           pos={pos}

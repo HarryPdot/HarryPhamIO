@@ -33,9 +33,10 @@ const fps: number = 16;
 const speed: number = 3;
 const Shrimp: any = (props) => {
   const [frameCount, setFrameCount] = useState<number>(0);
-  const [stance, setStance] = useState('stand1');
+  const [stance, setStance] = useState('walk1');
   const { pos, setPos, input, currentMap } = props;
   const shrimpRef = useRef(null);
+
   useEffect(() => {
     const interval = setInterval(() => frame(), fps);
     return () => clearInterval(interval);
@@ -44,7 +45,6 @@ const Shrimp: any = (props) => {
   const handleRefChange = (childElement) => {
     if (childElement) {
       const boundingRect = childElement.getBoundingClientRect();
-      console.log(boundingRect);
     }
   };
 

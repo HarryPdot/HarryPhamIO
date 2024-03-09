@@ -2,7 +2,7 @@
   height: 50px;
   position: fixed;
   pointer-events: none;
-  image-rendering: pixelated;
+  /* image-rendering: pixelated; */
   left: 540px;
   top: 360px;
   transform: var(--transform);
