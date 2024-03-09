@@ -34,20 +34,29 @@ const speed: number = 3;
 const Shrimp: any = (props) => {
   const [frameCount, setFrameCount] = useState<number>(0);
   const [stance, setStance] = useState('stand1');
-  const { pos, setPos, input, currentMap, mapsData, setCurrentMap } = props;
-  const shrimpRef = useRef();
+  const { pos, setPos, input, currentMap } = props;
+  const shrimpRef = useRef(null);
   useEffect(() => {
     const interval = setInterval(() => frame(), fps);
     return () => clearInterval(interval);
   }, [frameCount]);
 
+  const handleRefChange = (childElement) => {
+    if (childElement) {
+      const boundingRect = childElement.getBoundingClientRect();
+      console.log(boundingRect);
+    }
+  };
+
   const frame = () => {
     move();
     alignCharacterPosition();
     alignMapPosition();
+    afk();
     setFrameCount((prev) => prev + 1);
   };
 
+  const afk = () => {};
   const move = () => {
     if (Object.keys(input).every((boo) => !input[boo])) {
       animate(stances().stand);
@@ -56,6 +65,7 @@ const Shrimp: any = (props) => {
     animate(stances().walk);
     setDirection();
     if (input.left) {
+      console.log(currentMap.positionId);
       for (let i = 0; i < currentMap.positionId.length; i++) {
         if (collisionDetection('shrimp', currentMap.positionId[i], 6, 0, 0, 0))
           return;
@@ -116,7 +126,7 @@ const Shrimp: any = (props) => {
         }}
         stance={stance}
         className={styles.shrimp}
-        ref={shrimpRef}
+        onRefChange={handleRefChange}
       />
     ),
     [stance],

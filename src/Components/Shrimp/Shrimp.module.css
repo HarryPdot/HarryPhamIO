@@ -3,12 +3,8 @@
   position: fixed;
   pointer-events: none;
   image-rendering: pixelated;
-  /* left: calc(var(--shrimpX));
-  top: calc(var(--shrimpY)); */
   left: 540px;
   top: 360px;
   transform: var(--transform);
-  /* transform: translate3d(0, 0, 0); */
-  /* border: 1px solid red; */
   z-index: 9999;
 }
