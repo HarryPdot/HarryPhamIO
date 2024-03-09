@@ -33,7 +33,7 @@ const MainPage: React.FunctionComponent = () => {
     down: false,
   });
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const [mapsData, setMapsData] = useState<any>([]);
 
