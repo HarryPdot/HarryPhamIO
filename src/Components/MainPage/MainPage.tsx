@@ -25,14 +25,6 @@ type loadObjects = {
   test: boolean;
 };
 
-type mapInfo = {
-  name: string;
-  array: string[];
-  positionId: string[];
-  image: any;
-  startPosition: number[];
-};
-
 const left = 37 || 'a';
 const up = 38 || 'w';
 const right = 39 || 'd';

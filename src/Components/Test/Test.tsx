@@ -15,7 +15,7 @@ const Test = (props) => {
   useEffect(() => {
     const initialArray: any[] = [];
     const postArray: any[] = [];
-    let startPosition = '';
+    let startPosition;
     for (let i = 0; i < testCollision.length; i += 70) {
       initialArray.push(testCollision.slice(i, 70 + i));
     }
