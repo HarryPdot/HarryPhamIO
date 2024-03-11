@@ -19,7 +19,7 @@ const Collision = (props: any) => {
             backgroundColor: 'red',
             opacity: 0,
           } as React.CSSProperties;
-          if (col === 1025) {
+          if (col === 1025 || col === 1027) {
             return <div key={j} id={`${i}${j}`} style={divStyle}></div>;
           }
         });

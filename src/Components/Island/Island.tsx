@@ -18,12 +18,13 @@ const Island = (props) => {
     const initialArray: any[] = [];
     const postArray: any[] = [];
     let startPosition;
+    const portals = [];
     for (let i = 0; i < collision.length; i += 70) {
       initialArray.push(collision.slice(i, 70 + i));
     }
     for (let i = 0; i < initialArray.length; i++) {
       for (let j = 0; j < initialArray[i].length; j++) {
-        if (initialArray[i][j] === 1025) {
+        if (initialArray[i][j] === 1025 || initialArray[i][j] === 1027) {
           postArray.push(`${i}${j}`);
         }
         if (initialArray[i][j] === 1026) {
@@ -31,6 +32,9 @@ const Island = (props) => {
             x: j * x - screenWidth,
             y: i * y - screenHeight,
           };
+        }
+        if (initialArray[i][j] === 1027) {
+          portals.push(`${i}${j}`);
         }
       }
     }
@@ -42,6 +46,7 @@ const Island = (props) => {
         positionId: postArray,
         image: map,
         startPosition: startPosition,
+        portals: portals,
       },
     }));
     setCurrentMap({
@@ -50,6 +55,7 @@ const Island = (props) => {
       positionId: postArray,
       image: map,
       startPosition: startPosition,
+      portals: portals,
     });
     setLoadReady((prev) => ({ ...prev, island: true }));
   }, []);

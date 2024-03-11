@@ -1,0 +1,27 @@
+.loading {
+  height: 720px;
+  width: 1080px;
+  overflow: hidden;
+  position: absolute;
+  z-index: 999;
+  background-color: black;
+}
+
+@keyframes fade-out {
+  from {
+    background-color: black;
+    opacity: 100;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.loadingOut {
+  height: 720px;
+  width: 1080px;
+  overflow: hidden;
+  position: absolute;
+  z-index: 999;
+  animation: fade-out 5s;
+}

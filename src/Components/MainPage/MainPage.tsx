@@ -1,9 +1,10 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { Island } from '../Island/Island';
+import { Loading } from '../Loading/Loading';
 import { Shrimp } from '../Shrimp/Shrimp';
 import { Test } from '../Test/Test';
 import styles from './MainPage.module.css';
@@ -29,6 +30,11 @@ const left = 37 || 'a';
 const up = 38 || 'w';
 const right = 39 || 'd';
 const down = 40 || 's';
+
+const updateVar = (vars, value): any => {
+  if (typeof document === 'undefined') return;
+  return document.documentElement.style.setProperty(vars, value);
+};
 
 const MainPage: React.FunctionComponent = () => {
   const [input, setInput] = useState<keysInput>({
@@ -77,6 +83,8 @@ const MainPage: React.FunctionComponent = () => {
       spriteX: currentMap.startPosition.x,
       spriteY: currentMap.startPosition.y,
     });
+    updateVar('--shrimpX', pos.spriteX + 'px');
+    updateVar('--shrimpY', pos.spriteY + 'px');
   }, [currentMap]);
 
   const inputKey = (e: React.KeyboardEvent<HTMLElement>) => {
@@ -110,11 +118,7 @@ const MainPage: React.FunctionComponent = () => {
       onKeyDown={inputKey}
       onKeyUp={offPutKey}
     >
-      {isLoading ? (
-        <div className={styles.loading}></div>
-      ) : (
-        <div className={styles.loadingOut}></div>
-      )}
+      <Loading isLoading={isLoading}></Loading>
       <section className={styles.screen}>
         <Shrimp
           pos={pos}

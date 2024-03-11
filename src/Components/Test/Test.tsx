@@ -16,6 +16,7 @@ const Test = (props) => {
     const initialArray: any[] = [];
     const postArray: any[] = [];
     let startPosition;
+    const portals = [];
     for (let i = 0; i < testCollision.length; i += 70) {
       initialArray.push(testCollision.slice(i, 70 + i));
     }
@@ -30,6 +31,9 @@ const Test = (props) => {
             y: i * y - screenHeight,
           };
         }
+        if (initialArray[i][j] === 1027) {
+          portals.push(`${i}${j}`);
+        }
       }
     }
 
@@ -41,6 +45,7 @@ const Test = (props) => {
         positionId: postArray,
         image: map,
         startPosition: startPosition,
+        portals: portals,
       },
     }));
     setLoadReady((prev) => ({ ...prev, test: true }));

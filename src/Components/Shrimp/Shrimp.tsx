@@ -16,7 +16,7 @@ const position = (id: string) => {
   return element?.getBoundingClientRect();
 };
 
-const collisionDetection = (square1, square2, left, up, right, down) => {
+const colliding = (square1, square2, left, up, right, down) => {
   return (
     position(square1)?.x + position(square1)?.width >=
       position(square2)?.x - right &&
@@ -34,8 +34,8 @@ const speed: number = 3;
 const Shrimp: any = (props) => {
   const [frameCount, setFrameCount] = useState<number>(0);
   const [stance, setStance] = useState('walk1');
-  const { pos, setPos, input, currentMap } = props;
-  const shrimpRef = useRef(null);
+  const [shrimpDom, setShrimpDom] = useState({});
+  const { pos, setPos, input, currentMap, setCurrentMap, mapsData } = props;
 
   useEffect(() => {
     const interval = setInterval(() => frame(), fps);
@@ -45,6 +45,16 @@ const Shrimp: any = (props) => {
   const handleRefChange = (childElement) => {
     if (childElement) {
       const boundingRect = childElement.getBoundingClientRect();
+      setShrimpDom(boundingRect);
+    }
+    // console.log(shrimpDom);
+  };
+
+  const detectPortal = () => {
+    for (let i = 0; i < currentMap.portals.length; i++) {
+      if (colliding('shrimp', currentMap.portals[i], 0, 6, 0, 0)) {
+        setCurrentMap(mapsData.test);
+      }
     }
   };
 
@@ -66,29 +76,32 @@ const Shrimp: any = (props) => {
     setDirection();
     if (input.left) {
       for (let i = 0; i < currentMap.positionId.length; i++) {
-        if (collisionDetection('shrimp', currentMap.positionId[i], 6, 0, 0, 0))
-          return;
+        if (colliding('shrimp', currentMap.positionId[i], 6, 0, 0, 0)) return;
       }
       setPos({ ...pos, spriteX: pos.spriteX - speed });
     }
     if (input.up) {
       for (let i = 0; i < currentMap.positionId.length; i++) {
-        if (collisionDetection('shrimp', currentMap.positionId[i], 0, 6, 0, 0))
-          return;
+        if (colliding('shrimp', currentMap.positionId[i], 0, 6, 0, 0)) return;
       }
+      for (let i = 0; i < currentMap.portals.length; i++) {
+        if (colliding('shrimp', currentMap.portals[i], 0, 15, 0, 0)) {
+          setCurrentMap(mapsData.test);
+          return;
+        }
+      }
+
       setPos({ ...pos, spriteY: pos.spriteY - speed });
     }
     if (input.right) {
       for (let i = 0; i < currentMap.positionId.length; i++) {
-        if (collisionDetection('shrimp', currentMap.positionId[i], 0, 0, 6, 0))
-          return;
+        if (colliding('shrimp', currentMap.positionId[i], 0, 0, 6, 0)) return;
       }
       setPos({ ...pos, spriteX: pos.spriteX + speed });
     }
     if (input.down) {
       for (let i = 0; i < currentMap.positionId.length; i++) {
-        if (collisionDetection('shrimp', currentMap.positionId[i], 0, 0, 0, 6))
-          return;
+        if (colliding('shrimp', currentMap.positionId[i], 0, 0, 0, 6)) return;
       }
       setPos({ ...pos, spriteY: pos.spriteY + speed });
     }
