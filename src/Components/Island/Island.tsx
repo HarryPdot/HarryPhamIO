@@ -15,10 +15,10 @@ const Island = (props) => {
   const { setCurrentMap, setMapsData, currentMap } = props;
 
   useEffect(() => {
-    const initialArray: any[] = [];
-    const postArray: any[] = [];
+    const initialArray: any = [];
+    const postArray: string[] = [];
     let startPosition;
-    const portals = [];
+    const portals: string[] = [];
     for (let i = 0; i < collision.length; i += 70) {
       initialArray.push(collision.slice(i, 70 + i));
     }

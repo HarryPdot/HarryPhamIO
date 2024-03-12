@@ -13,10 +13,10 @@ const Test = (props) => {
   const { setMapsData, currentMap, testing } = props;
 
   useEffect(() => {
-    const initialArray: any[] = [];
-    const postArray: any[] = [];
+    const initialArray: any = [];
+    const postArray: string[] = [];
     let startPosition;
-    const portals = [];
+    const portals: string[] = [];
     for (let i = 0; i < testCollision.length; i += 70) {
       initialArray.push(testCollision.slice(i, 70 + i));
     }
