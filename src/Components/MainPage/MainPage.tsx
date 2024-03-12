@@ -130,16 +130,15 @@ const MainPage: React.FunctionComponent = () => {
           currentMap={currentMap}
         ></Island>
         <Test setMapsData={setMapsData} currentMap={currentMap}></Test>
-        {Object.values(mapsData) !== 0
-          ? Object.values(mapsData).map((component, i) => (
-              <Image
-                src={component.image}
-                alt="cached"
-                style={{ display: 'none' }}
-                key={i}
-              />
-            ))
-          : null}
+        {Object.values(mapsData).map((component: any, i) => (
+          <Image
+            src={component.image}
+            alt="cached"
+            style={{ display: 'none' }}
+            key={i}
+            priority
+          />
+        ))}
       </section>
     </main>
   );
