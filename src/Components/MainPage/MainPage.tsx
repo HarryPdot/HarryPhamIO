@@ -71,8 +71,8 @@ const MainPage: React.FunctionComponent = () => {
     updateVar('--shrimpY', pos.spriteY + 'px');
     setTimeout(() => {
       setIsLoading(false);
+      setMoving(true);
     }, 2000);
-    setMoving(true);
   }, [currentMap]);
 
   const inputKey = (e: React.KeyboardEvent<HTMLElement>) => {
