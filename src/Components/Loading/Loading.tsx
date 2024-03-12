@@ -6,7 +6,9 @@ const Loading = (props) => {
   return (
     <>
       {isLoading ? (
-        <div className={styles.loading}></div>
+        <div className={styles.loadingIn}>
+          <div className={styles.dotspin}></div>
+        </div>
       ) : (
         <div className={styles.loadingOut}></div>
       )}

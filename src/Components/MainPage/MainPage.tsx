@@ -21,9 +21,9 @@ type keysInput = {
 };
 
 type loadObjects = {
-  shrimp: boolean;
+  // shrimp: boolean;
   island: boolean;
-  test: boolean;
+  // test: boolean;
 };
 
 const left = 37 || 'a';
@@ -45,7 +45,6 @@ const MainPage: React.FunctionComponent = () => {
   });
 
   const [loadReady, setLoadReady] = useState<loadObjects>({
-    shrimp: false,
     island: false,
     test: false,
   });
@@ -62,22 +61,6 @@ const MainPage: React.FunctionComponent = () => {
   const [currentMap, setCurrentMap] = useState<any>([]);
 
   useEffect(() => {
-    if (
-      Object.values(loadReady).every((component) => {
-        component === true;
-      })
-    ) {
-      console.log('ready');
-    }
-  }, [loadReady]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-  }, []);
-
-  useEffect(() => {
     if (currentMap.length === 0) return;
     setPos({
       spriteX: currentMap.startPosition.x,
@@ -85,6 +68,9 @@ const MainPage: React.FunctionComponent = () => {
     });
     updateVar('--shrimpX', pos.spriteX + 'px');
     updateVar('--shrimpY', pos.spriteY + 'px');
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
   }, [currentMap]);
 
   const inputKey = (e: React.KeyboardEvent<HTMLElement>) => {
