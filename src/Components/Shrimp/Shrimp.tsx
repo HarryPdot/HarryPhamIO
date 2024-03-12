@@ -206,7 +206,7 @@ const Shrimp: any = (props) => {
             setTimeout(() => {
               setMoving(false);
               setCurrentMap(mapsData[Object.keys(currentMap.portals)[i]]);
-            }, 2000);
+            }, 0);
           }
         }
       }

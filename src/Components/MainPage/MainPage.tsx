@@ -66,10 +66,11 @@ const MainPage: React.FunctionComponent = () => {
     });
     updateVar('--shrimpX', pos.spriteX + 'px');
     updateVar('--shrimpY', pos.spriteY + 'px');
+    setIsLoading(false);
+
     setTimeout(() => {
-      setIsLoading(false);
       setMoving(true);
-    }, 2000);
+    }, 500);
   }, [currentMap]);
 
   const inputKey = (e: React.KeyboardEvent<HTMLElement>) => {
