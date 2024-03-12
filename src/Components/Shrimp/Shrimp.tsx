@@ -59,14 +59,6 @@ const Shrimp: any = (props) => {
     // console.log(shrimpDom);
   };
 
-  const detectPortal = () => {
-    for (let i = 0; i < currentMap.portals.length; i++) {
-      if (colliding('shrimp', currentMap.portals[i], 0, 6, 0, 0)) {
-        setCurrentMap(mapsData.test);
-      }
-    }
-  };
-
   const frame = () => {
     move();
     alignCharacterPosition();

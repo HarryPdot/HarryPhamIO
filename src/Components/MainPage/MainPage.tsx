@@ -43,11 +43,6 @@ const MainPage: React.FunctionComponent = () => {
     down: false,
   });
 
-  const [loadReady, setLoadReady] = useState<loadObjects>({
-    island: false,
-    test: false,
-  });
-
   const [moving, setMoving] = useState<boolean>(false);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -63,6 +58,7 @@ const MainPage: React.FunctionComponent = () => {
 
   useEffect(() => {
     if (currentMap.length === 0) return;
+    console.log(currentMap.name === 'island');
     setPos({
       spriteX: currentMap.startPosition.x,
       spriteY: currentMap.startPosition.y,
@@ -117,7 +113,6 @@ const MainPage: React.FunctionComponent = () => {
           currentMap={currentMap}
           mapsData={mapsData}
           setCurrentMap={setCurrentMap}
-          loadReady={loadReady}
           setIsLoading={setIsLoading}
           setMoving={setMoving}
         />
