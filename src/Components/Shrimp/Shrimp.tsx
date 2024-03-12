@@ -84,12 +84,16 @@ const Shrimp: any = (props) => {
         )
           return;
       }
-      for (let i = 0; i < Object.values(currentMap.portals).length; i++) {
-        for (let j = 0; j < Object.values(currentMap.portals)[i].length; j++) {
+      for (let i = 0; i < Object.values<any>(currentMap.portals).length; i++) {
+        for (
+          let j = 0;
+          j < Object.values<any>(currentMap.portals)[i].length;
+          j++
+        ) {
           if (
             colliding(
               'shrimp',
-              Object.values(currentMap.portals)[i][j],
+              Object.values<any>(currentMap.portals)[i][j],
               0,
               0,
               0,
@@ -114,12 +118,16 @@ const Shrimp: any = (props) => {
         )
           return;
       }
-      for (let i = 0; i < Object.values(currentMap.portals).length; i++) {
-        for (let j = 0; j < Object.values(currentMap.portals)[i].length; j++) {
+      for (let i = 0; i < Object.values<any>(currentMap.portals).length; i++) {
+        for (
+          let j = 0;
+          j < Object.values<any>(currentMap.portals)[i].length;
+          j++
+        ) {
           if (
             colliding(
               'shrimp',
-              Object.values(currentMap.portals)[i][j],
+              Object.values<any>(currentMap.portals)[i][j],
               0,
               portalCollisionSpeed,
               0,
@@ -144,12 +152,16 @@ const Shrimp: any = (props) => {
         )
           return;
       }
-      for (let i = 0; i < Object.values(currentMap.portals).length; i++) {
-        for (let j = 0; j < Object.values(currentMap.portals)[i].length; j++) {
+      for (let i = 0; i < Object.values<any>(currentMap.portals).length; i++) {
+        for (
+          let j = 0;
+          j < Object.values<any>(currentMap.portals)[i].length;
+          j++
+        ) {
           if (
             colliding(
               'shrimp',
-              Object.values(currentMap.portals)[i][j],
+              Object.values<any>(currentMap.portals)[i][j],
               0,
               0,
               portalCollisionSpeed,
@@ -174,12 +186,16 @@ const Shrimp: any = (props) => {
         )
           return;
       }
-      for (let i = 0; i < Object.values(currentMap.portals).length; i++) {
-        for (let j = 0; j < Object.values(currentMap.portals)[i].length; j++) {
+      for (let i = 0; i < Object.values<any>(currentMap.portals).length; i++) {
+        for (
+          let j = 0;
+          j < Object.values<any>(currentMap.portals)[i].length;
+          j++
+        ) {
           if (
             colliding(
               'shrimp',
-              Object.values(currentMap.portals)[i][j],
+              Object.values<any>(currentMap.portals)[i][j],
               0,
               0,
               0,

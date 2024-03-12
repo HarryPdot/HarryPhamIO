@@ -18,7 +18,7 @@ const Island = (props) => {
     const initialArray: any = [];
     const postArray: string[] = [];
     let startPosition;
-    const portals = { test: [], newTown: [] };
+    const portals: any = { test: [], newTown: [] };
     for (let i = 0; i < collision.length; i += 70) {
       initialArray.push(collision.slice(i, 70 + i));
     }
