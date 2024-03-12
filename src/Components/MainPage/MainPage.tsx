@@ -68,7 +68,6 @@ const MainPage: React.FunctionComponent = () => {
     updateVar('--shrimpY', pos.spriteY + 'px');
     setIsLoading(false);
     setTimeout(() => {
-      setInput('');
       setMoving(true);
     }, 1000);
   }, [currentMap]);

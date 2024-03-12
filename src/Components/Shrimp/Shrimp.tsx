@@ -55,23 +55,12 @@ const Shrimp: any = (props) => {
     return () => clearInterval(interval);
   }, [frameCount]);
 
-  const handleRefChange = (childElement) => {
-    if (childElement) {
-      const boundingRect = childElement.getBoundingClientRect();
-      setShrimpDom(boundingRect);
-    }
-    // console.log(shrimpDom);
-  };
-
   const frame = () => {
     move();
     alignCharacterPosition();
     alignMapPosition();
-    afk();
     setFrameCount((prev) => prev + 1);
   };
-
-  const afk = () => {};
 
   const colliding = (left, up, right, down, calc) => {
     for (let i = 0; i < currentMap.positionId.length; i++) {
@@ -117,7 +106,7 @@ const Shrimp: any = (props) => {
       return;
     }
     animate(stances().walk);
-    if (lastKey === 'left') {
+    if (input.left) {
       colliding(collidingSpeed, 0, 0, 0, {
         ...pos,
         spriteX: pos.spriteX - speed,
@@ -125,7 +114,7 @@ const Shrimp: any = (props) => {
       portalCheck(collidingSpeed, 0, 0, 0);
       setDirection();
     }
-    if (lastKey === 'up') {
+    if (input.up) {
       colliding(0, collidingSpeed, 0, 0, {
         ...pos,
         spriteY: pos.spriteY - speed,
@@ -133,7 +122,7 @@ const Shrimp: any = (props) => {
       portalCheck(0, collidingSpeed, 0, 0);
       setDirection();
     }
-    if (lastKey === 'right') {
+    if (input.right) {
       colliding(0, 0, collidingSpeed, 0, {
         ...pos,
         spriteX: pos.spriteX + speed,
@@ -141,7 +130,7 @@ const Shrimp: any = (props) => {
       portalCheck(0, 0, collidingSpeed, 0);
       setDirection();
     }
-    if (lastKey === 'down') {
+    if (input.down) {
       colliding(0, 0, 0, collidingSpeed, {
         ...pos,
         spriteY: pos.spriteY + speed,
@@ -182,7 +171,6 @@ const Shrimp: any = (props) => {
         }}
         stance={stance}
         className={styles.shrimp}
-        onRefChange={handleRefChange}
       />
     ),
     [stance],
