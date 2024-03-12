@@ -73,7 +73,7 @@ const Shrimp: any = (props) => {
     setPos(calc);
   };
 
-  const portalCheck = () => {
+  const portalCheck = (left, up, right, down) => {
     for (let i = 0; i < Object.values<any>(currentMap.portals).length; i++) {
       for (
         let j = 0;
@@ -84,10 +84,10 @@ const Shrimp: any = (props) => {
           boundaryCheck(
             'shrimp',
             Object.values<any>(currentMap.portals)[i][j],
-            0,
-            portalCollisionSpeed,
-            0,
-            0,
+            left,
+            up,
+            right,
+            down,
           )
         ) {
           setIsLoading(true);
