@@ -58,7 +58,6 @@ const MainPage: React.FunctionComponent = () => {
 
   useEffect(() => {
     if (currentMap.length === 0) return;
-    console.log(currentMap.name === 'island');
     setPos({
       spriteX: currentMap.startPosition.x,
       spriteY: currentMap.startPosition.y,
@@ -118,6 +117,7 @@ const MainPage: React.FunctionComponent = () => {
         />
         {currentMap.image && (
           <Image
+            rel="preload"
             src={currentMap.image}
             alt="Map"
             className={styles.bg}
@@ -130,6 +130,16 @@ const MainPage: React.FunctionComponent = () => {
           currentMap={currentMap}
         ></Island>
         <Test setMapsData={setMapsData} currentMap={currentMap}></Test>
+        {Object.values(mapsData) !== 0
+          ? Object.values(mapsData).map((component, i) => (
+              <Image
+                src={component.image}
+                alt="cached"
+                style={{ display: 'none' }}
+                key={i}
+              />
+            ))
+          : null}
       </section>
     </main>
   );
