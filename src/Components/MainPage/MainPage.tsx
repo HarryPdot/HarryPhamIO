@@ -67,24 +67,24 @@ const MainPage: React.FunctionComponent = () => {
     updateVar('--shrimpX', pos.spriteX + 'px');
     updateVar('--shrimpY', pos.spriteY + 'px');
     setIsLoading(false);
-
     setTimeout(() => {
+      setInput('');
       setMoving(true);
-    }, 500);
+    }, 1000);
   }, [currentMap]);
 
   const inputKey = (e: React.KeyboardEvent<HTMLElement>) => {
     if (!moving) return;
-    if (e.keyCode === left) {
+    if (e.keyCode === left && moving) {
       setInput({ ...input, left: true });
       setLastKey('left');
-    } else if (e.keyCode === up) {
+    } else if (e.keyCode === up && moving) {
       setInput({ ...input, up: true });
       setLastKey('up');
-    } else if (e.keyCode === right) {
+    } else if (e.keyCode === right && moving) {
       setInput({ ...input, right: true });
       setLastKey('right');
-    } else if (e.keyCode === down) {
+    } else if (e.keyCode === down && moving) {
       setInput({ ...input, down: true });
       setLastKey('down');
     }
@@ -116,12 +116,14 @@ const MainPage: React.FunctionComponent = () => {
           pos={pos}
           setPos={setPos}
           input={input}
+          setInput={setInput}
           currentMap={currentMap}
           mapsData={mapsData}
           setCurrentMap={setCurrentMap}
           setIsLoading={setIsLoading}
           setMoving={setMoving}
           lastKey={lastKey}
+          moving={moving}
         />
         {currentMap.image && (
           <Image
