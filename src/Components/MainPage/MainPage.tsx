@@ -21,9 +21,8 @@ type keysInput = {
 };
 
 type loadObjects = {
-  // shrimp: boolean;
   island: boolean;
-  // test: boolean;
+  test: boolean;
 };
 
 const left = 37 || 'a';
@@ -49,6 +48,8 @@ const MainPage: React.FunctionComponent = () => {
     test: false,
   });
 
+  const [moving, setMoving] = useState<boolean>(false);
+
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const [mapsData, setMapsData] = useState<any>([]);
@@ -71,9 +72,11 @@ const MainPage: React.FunctionComponent = () => {
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
+    setMoving(true);
   }, [currentMap]);
 
   const inputKey = (e: React.KeyboardEvent<HTMLElement>) => {
+    if (!moving) return;
     if (e.keyCode === left) {
       setInput({ ...input, left: true });
     } else if (e.keyCode === up) {
@@ -86,6 +89,7 @@ const MainPage: React.FunctionComponent = () => {
   };
 
   const offPutKey = (e: React.KeyboardEvent<HTMLElement>) => {
+    if (!moving) return;
     if (e.keyCode === left) {
       setInput({ ...input, left: false });
     } else if (e.keyCode === up) {
@@ -113,8 +117,9 @@ const MainPage: React.FunctionComponent = () => {
           currentMap={currentMap}
           mapsData={mapsData}
           setCurrentMap={setCurrentMap}
-          setLoadReady={setLoadReady}
           loadReady={loadReady}
+          setIsLoading={setIsLoading}
+          setMoving={setMoving}
         />
         {currentMap.image && (
           <Image
@@ -128,13 +133,8 @@ const MainPage: React.FunctionComponent = () => {
           setCurrentMap={setCurrentMap}
           setMapsData={setMapsData}
           currentMap={currentMap}
-          setLoadReady={setLoadReady}
         ></Island>
-        <Test
-          setMapsData={setMapsData}
-          currentMap={currentMap}
-          setLoadReady={setLoadReady}
-        ></Test>
+        <Test setMapsData={setMapsData} currentMap={currentMap}></Test>
       </section>
     </main>
   );

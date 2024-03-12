@@ -35,7 +35,16 @@ const Shrimp: any = (props) => {
   const [frameCount, setFrameCount] = useState<number>(0);
   const [stance, setStance] = useState('walk1');
   const [shrimpDom, setShrimpDom] = useState({});
-  const { pos, setPos, input, currentMap, setCurrentMap, mapsData } = props;
+  const {
+    pos,
+    setPos,
+    input,
+    currentMap,
+    setCurrentMap,
+    mapsData,
+    setIsLoading,
+    setMoving,
+  } = props;
 
   useEffect(() => {
     const interval = setInterval(() => frame(), fps);
@@ -86,8 +95,11 @@ const Shrimp: any = (props) => {
       }
       for (let i = 0; i < currentMap.portals.length; i++) {
         if (colliding('shrimp', currentMap.portals[i], 0, 15, 0, 0)) {
-          setCurrentMap(mapsData.test);
-          return;
+          setIsLoading(true);
+          setTimeout(() => {
+            setMoving(false);
+            setCurrentMap(mapsData.test);
+          }, 2000);
         }
       }
 

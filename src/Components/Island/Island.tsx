@@ -12,7 +12,7 @@ const screenWidth = 540;
 const screenHeight = 360;
 
 const Island = (props) => {
-  const { setCurrentMap, setMapsData, currentMap, setLoadReady } = props;
+  const { setCurrentMap, setMapsData, currentMap } = props;
 
   useEffect(() => {
     const initialArray: any[] = [];
@@ -57,7 +57,6 @@ const Island = (props) => {
       startPosition: startPosition,
       portals: portals,
     });
-    setLoadReady((prev) => ({ ...prev, island: true }));
   }, []);
 
   return <Collision squareArr={currentMap.array} x={x} y={y} />;
