@@ -30,7 +30,9 @@ const colliding = (square1, square2, left, up, right, down) => {
 };
 
 const fps: number = 16;
-const speed: number = 3;
+const speed: number = 5;
+const collidingSpeed = 15;
+const portalCollisionSpeed = 25;
 const Shrimp: any = (props) => {
   const [frameCount, setFrameCount] = useState<number>(0);
   const [stance, setStance] = useState('walk1');
@@ -44,6 +46,7 @@ const Shrimp: any = (props) => {
     mapsData,
     setIsLoading,
     setMoving,
+    lastKey,
   } = props;
 
   useEffect(() => {
@@ -74,40 +77,125 @@ const Shrimp: any = (props) => {
       return;
     }
     animate(stances().walk);
-    setDirection();
-    if (input.left) {
+    if (input.left && lastKey === 'left') {
       for (let i = 0; i < currentMap.positionId.length; i++) {
-        if (colliding('shrimp', currentMap.positionId[i], 6, 0, 0, 0)) return;
+        if (
+          colliding('shrimp', currentMap.positionId[i], collidingSpeed, 0, 0, 0)
+        )
+          return;
       }
-      setPos({ ...pos, spriteX: pos.spriteX - speed });
-    }
-    if (input.up) {
-      for (let i = 0; i < currentMap.positionId.length; i++) {
-        if (colliding('shrimp', currentMap.positionId[i], 0, 6, 0, 0)) return;
-      }
-      for (let i = 0; i < currentMap.portals.length; i++) {
-        if (colliding('shrimp', currentMap.portals[i], 0, 15, 0, 0)) {
-          setIsLoading(true);
-          setTimeout(() => {
-            setMoving(false);
-            setCurrentMap(mapsData.test);
-          }, 2000);
+      for (let i = 0; i < Object.values(currentMap.portals).length; i++) {
+        for (let j = 0; j < Object.values(currentMap.portals)[i].length; j++) {
+          if (
+            colliding(
+              'shrimp',
+              Object.values(currentMap.portals)[i][j],
+              0,
+              0,
+              0,
+              portalCollisionSpeed,
+            )
+          ) {
+            setIsLoading(true);
+            setTimeout(() => {
+              setMoving(false);
+              setCurrentMap(mapsData[Object.keys(currentMap.portals)[i]]);
+            }, 2000);
+          }
         }
       }
-
-      setPos({ ...pos, spriteY: pos.spriteY - speed });
+      setPos({ ...pos, spriteX: pos.spriteX - speed });
+      setDirection();
     }
-    if (input.right) {
+    if (input.up && lastKey === 'up') {
       for (let i = 0; i < currentMap.positionId.length; i++) {
-        if (colliding('shrimp', currentMap.positionId[i], 0, 0, 6, 0)) return;
+        if (
+          colliding('shrimp', currentMap.positionId[i], 0, collidingSpeed, 0, 0)
+        )
+          return;
+      }
+      for (let i = 0; i < Object.values(currentMap.portals).length; i++) {
+        for (let j = 0; j < Object.values(currentMap.portals)[i].length; j++) {
+          if (
+            colliding(
+              'shrimp',
+              Object.values(currentMap.portals)[i][j],
+              0,
+              portalCollisionSpeed,
+              0,
+              0,
+            )
+          ) {
+            setIsLoading(true);
+            setTimeout(() => {
+              setMoving(false);
+              setCurrentMap(mapsData[Object.keys(currentMap.portals)[i]]);
+            }, 2000);
+          }
+        }
+      }
+      setPos({ ...pos, spriteY: pos.spriteY - speed });
+      setDirection();
+    }
+    if (input.right && lastKey === 'right') {
+      for (let i = 0; i < currentMap.positionId.length; i++) {
+        if (
+          colliding('shrimp', currentMap.positionId[i], 0, 0, collidingSpeed, 0)
+        )
+          return;
+      }
+      for (let i = 0; i < Object.values(currentMap.portals).length; i++) {
+        for (let j = 0; j < Object.values(currentMap.portals)[i].length; j++) {
+          if (
+            colliding(
+              'shrimp',
+              Object.values(currentMap.portals)[i][j],
+              0,
+              0,
+              portalCollisionSpeed,
+              0,
+            )
+          ) {
+            setIsLoading(true);
+            setTimeout(() => {
+              setMoving(false);
+              setCurrentMap(mapsData[Object.keys(currentMap.portals)[i]]);
+            }, 2000);
+          }
+        }
       }
       setPos({ ...pos, spriteX: pos.spriteX + speed });
+      setDirection();
     }
-    if (input.down) {
+    if (input.down && lastKey === 'down') {
       for (let i = 0; i < currentMap.positionId.length; i++) {
-        if (colliding('shrimp', currentMap.positionId[i], 0, 0, 0, 6)) return;
+        if (
+          colliding('shrimp', currentMap.positionId[i], 0, 0, 0, collidingSpeed)
+        )
+          return;
+      }
+      for (let i = 0; i < Object.values(currentMap.portals).length; i++) {
+        for (let j = 0; j < Object.values(currentMap.portals)[i].length; j++) {
+          if (
+            colliding(
+              'shrimp',
+              Object.values(currentMap.portals)[i][j],
+              0,
+              0,
+              0,
+              portalCollisionSpeed,
+            )
+          ) {
+            setIsLoading(true);
+            setTimeout(() => {
+              setMoving(false);
+              setCurrentMap(mapsData[Object.keys(currentMap.portals)[i]]);
+            }, 2000);
+          }
+        }
       }
       setPos({ ...pos, spriteY: pos.spriteY + speed });
+      setDirection();
     }
   };
 

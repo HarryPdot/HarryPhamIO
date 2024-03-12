@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { Island } from '../Island/Island';
 import { Loading } from '../Loading/Loading';
+import { NewTown } from '../NewTown/NewTown';
 import { Shrimp } from '../Shrimp/Shrimp';
 import { Test } from '../Test/Test';
 import styles from './MainPage.module.css';
@@ -42,6 +43,7 @@ const MainPage: React.FunctionComponent = () => {
     right: false,
     down: false,
   });
+  const [lastKey, setLastKey] = useState<string>('');
 
   const [moving, setMoving] = useState<boolean>(false);
 
@@ -74,12 +76,16 @@ const MainPage: React.FunctionComponent = () => {
     if (!moving) return;
     if (e.keyCode === left) {
       setInput({ ...input, left: true });
+      setLastKey('left');
     } else if (e.keyCode === up) {
       setInput({ ...input, up: true });
+      setLastKey('up');
     } else if (e.keyCode === right) {
       setInput({ ...input, right: true });
+      setLastKey('right');
     } else if (e.keyCode === down) {
       setInput({ ...input, down: true });
+      setLastKey('down');
     }
   };
 
@@ -114,6 +120,7 @@ const MainPage: React.FunctionComponent = () => {
           setCurrentMap={setCurrentMap}
           setIsLoading={setIsLoading}
           setMoving={setMoving}
+          lastKey={lastKey}
         />
         {currentMap.image && (
           <Image
@@ -129,6 +136,7 @@ const MainPage: React.FunctionComponent = () => {
           setMapsData={setMapsData}
           currentMap={currentMap}
         ></Island>
+        <NewTown setMapsData={setMapsData} currentMap={currentMap}></NewTown>
         <Test setMapsData={setMapsData} currentMap={currentMap}></Test>
         {Object.values(mapsData).map((component: any, i) => (
           <Image
