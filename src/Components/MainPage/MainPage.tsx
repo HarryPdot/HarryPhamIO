@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Island } from '../Island/Island';
 import { Loading } from '../Loading/Loading';
@@ -21,17 +21,12 @@ type keysInput = {
   down: boolean;
 };
 
-type loadObjects = {
-  island: boolean;
-  test: boolean;
-};
-
 const left = 37 || 'a';
 const up = 38 || 'w';
 const right = 39 || 'd';
 const down = 40 || 's';
 
-const updateVar = (vars, value): any => {
+const updateVar = (vars, value) => {
   if (typeof document === 'undefined') return;
   return document.documentElement.style.setProperty(vars, value);
 };
@@ -49,7 +44,7 @@ const MainPage: React.FunctionComponent = () => {
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const [mapsData, setMapsData] = useState<any>([]);
+  const [mapsData, setMapsData] = useState([]);
 
   const [pos, setPos] = useState<spritePosition>({
     spriteX: 684,

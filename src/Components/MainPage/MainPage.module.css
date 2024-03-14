@@ -25,10 +25,6 @@
 }
 
 .collisionScreen {
-  /* --mapX: -468px;
-  --shrimpX: 468px;
-  --mapY: -648px;
-  --shrimpY: 648px; */
   transform: translate3d(var(--mapX), var(--mapY), 0);
   width: 3360px;
   height: 1920px;
