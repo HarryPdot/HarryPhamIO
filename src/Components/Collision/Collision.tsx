@@ -1,7 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
-
 import styles from './Collision.module.css';
 
 const Collision = (props: any) => {

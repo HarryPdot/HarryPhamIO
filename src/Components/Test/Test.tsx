@@ -10,7 +10,7 @@ const y = 48;
 const screenWidth = 540;
 const screenHeight = 360;
 const Test = (props) => {
-  const { setMapsData, currentMap, testing } = props;
+  const { setMapsData, currentMap } = props;
 
   useEffect(() => {
     const initialArray: any = [];

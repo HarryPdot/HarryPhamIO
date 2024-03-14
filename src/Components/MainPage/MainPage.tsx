@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Island } from '../Island/Island';
 import { Loading } from '../Loading/Loading';
@@ -19,11 +19,6 @@ type keysInput = {
   up: boolean;
   right: boolean;
   down: boolean;
-};
-
-type loadObjects = {
-  island: boolean;
-  test: boolean;
 };
 
 const left = 37 || 'a';

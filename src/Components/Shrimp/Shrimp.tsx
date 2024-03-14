@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { Character, stances } from '@/Assets/index';
 
@@ -32,11 +32,9 @@ const boundaryCheck = (square1, square2, left, up, right, down) => {
 const fps: number = 16;
 const speed: number = 6;
 const collidingSpeed = 15;
-const portalCollisionSpeed = 25;
 const Shrimp: any = (props) => {
   const [frameCount, setFrameCount] = useState<number>(0);
   const [stance, setStance] = useState('walk1');
-  const [shrimpDom, setShrimpDom] = useState({});
   const {
     pos,
     setPos,
@@ -46,8 +44,6 @@ const Shrimp: any = (props) => {
     mapsData,
     setIsLoading,
     setMoving,
-    lastKey,
-    moving,
   } = props;
 
   useEffect(() => {
