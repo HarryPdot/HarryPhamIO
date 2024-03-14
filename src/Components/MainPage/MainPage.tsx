@@ -26,7 +26,7 @@ const up = 38 || 'w';
 const right = 39 || 'd';
 const down = 40 || 's';
 
-const updateVar = (vars, value): any => {
+const updateVar = (vars, value) => {
   if (typeof document === 'undefined') return;
   return document.documentElement.style.setProperty(vars, value);
 };
@@ -44,7 +44,7 @@ const MainPage: React.FunctionComponent = () => {
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const [mapsData, setMapsData] = useState<any>([]);
+  const [mapsData, setMapsData] = useState([]);
 
   const [pos, setPos] = useState<spritePosition>({
     spriteX: 684,

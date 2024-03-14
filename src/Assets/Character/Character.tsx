@@ -8,9 +8,9 @@ export const Character = ({ stance, className, style, id }) => {
       return res.blob();
     });
 
-  const { data, error, isLoading } = useSWR<any>(url, fetcher);
+  const { data, error, isLoading } = useSWR<Blob | MediaSource>(url, fetcher);
 
-  if (error) {
+  if (!data || error) {
     return <div>Failed to fetch users.</div>;
   }
   if (isLoading) {

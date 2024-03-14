@@ -2,7 +2,7 @@
 
 import styles from './Collision.module.css';
 
-const Collision = (props: any) => {
+const Collision = (props) => {
   const { squareArr, x, y } = props;
   return (
     <section className={styles.collisionScreen}>

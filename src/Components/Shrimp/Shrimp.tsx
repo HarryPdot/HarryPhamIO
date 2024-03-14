@@ -6,7 +6,7 @@ import styles from './Shrimp.module.css';
 
 type positionType = HTMLDivElement | HTMLImageElement;
 
-const updateVar = (vars, value): any => {
+const updateVar = (vars, value) => {
   if (typeof document === 'undefined') return;
   return document.documentElement.style.setProperty(vars, value);
 };
@@ -32,7 +32,7 @@ const boundaryCheck = (square1, square2, left, up, right, down) => {
 const fps: number = 16;
 const speed: number = 6;
 const collidingSpeed = 15;
-const Shrimp: any = (props) => {
+const Shrimp = (props) => {
   const [frameCount, setFrameCount] = useState<number>(0);
   const [stance, setStance] = useState('walk1');
   const {
@@ -70,7 +70,7 @@ const Shrimp: any = (props) => {
   };
 
   const portalCheck = (left, up, right, down) => {
-    for (let i = 0; i < Object.values<any>(currentMap.portals).length; i++) {
+    for (let i = 0; i < Object.values(currentMap.portals).length; i++) {
       for (
         let j = 0;
         j < Object.values<any>(currentMap.portals)[i].length;
